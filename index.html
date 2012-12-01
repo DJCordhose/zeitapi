@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js" ng-app="EinkommenApp">
+<html lang="en" class="no-js" ng-app="ZeitApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Unterhaltsrechner</title>
+    <title>Zeit API</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- http://bootswatch.com/ -->
     <link rel="stylesheet" media="screen" href="bootstrap/css/bootstrap.css" >
@@ -12,11 +12,13 @@
 <!--[if lt IE 9]><p class=chromeframe>Ihr Browser ist <em>uralt!</em>
     <a href="http://browsehappy.com/">Installieren Sie sich einen neueren Browser</a> oder
     <a href="http://www.google.com/chromeframe/?redirect=true">Google Chrome Frame</a>, um diese Seite zu benutzen.</p><![endif]-->
-<body ng-controller="RechnerCtrl">
+<body ng-controller="ZeitCtrl">
     <div ng-view></div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.js"></script>
+    <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript">
 
         var _gaq = _gaq || [];

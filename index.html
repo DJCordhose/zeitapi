@@ -8,6 +8,12 @@
     <!-- http://bootswatch.com/ -->
     <link rel="stylesheet" media="screen" href="bootstrap/css/bootstrap.css" >
     <link rel="stylesheet" media="screen" href="bootstrap/css/bootstrap-responsive.css" >
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
 </head>
 <!--[if lt IE 9]><p class=chromeframe>Ihr Browser ist <em>uralt!</em>
     <a href="http://browsehappy.com/">Installieren Sie sich einen neueren Browser</a> oder
@@ -44,8 +50,8 @@
                 <div class="well sidebar-nav">
                     <ul class="nav nav-list">
                         <li class="nav-header">Sidebar</li>
-                        <li class="active"><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
+                        <li class="active">
+                        <li><a href="#">Artikel finden</a></li>
                         <li><a href="#">Link</a></li>
                         <li><a href="#">Link</a></li>
                     </ul>
@@ -54,9 +60,7 @@
             <div class="span9">
                 <div class="row-fluid">
                     <div class="span9">
-                        <h2>Heading</h2>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                        <p><a class="btn" href="#">View details &raquo;</a></p>
+                        <div ng-view></div>
                     </div><!--/span-->
             </div><!--/span-->
         </div><!--/row-->

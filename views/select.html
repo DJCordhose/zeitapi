@@ -1,5 +1,9 @@
-Artikel finden
-<form novalidate class="simple-form">
-    Schlagwort: <input type="text" ng-model="article.keyword" /><br />
-    <button ng-click="articleFind()">finden</button>
+<form name="formArticleFind" class="simple-form">
+    <h3>Artikel finden</h3>
+
+    <div class="control-group">
+        <label>Schlagwort: </label>
+        <input type="text" ng-model="article.keyword" required/><br/>
+        <button ng-click="articleFind(article.keyword)" ng-disabled="formArticleFind.$invalid">finden</button>
+    </div>
 </form>

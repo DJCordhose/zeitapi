@@ -1,12 +1,6 @@
 "use strict";
 
-var ZeitApp = angular.module('ZeitApp', []);
-
-function ZeitCtrl($scope) {
-
-}
-
-angular.module('mongolab', ['ngResource']).
+var ZeitApp = angular.module('ZeitApp', ['ngResource']).
     factory('Project', function($resource) {
         var Project = $resource('http://api.zeit.de/content?q=:' +
             '/angularjs/collections/projects/:id',
@@ -26,3 +20,8 @@ angular.module('mongolab', ['ngResource']).
 
         return Project;
     });
+
+
+function ZeitCtrl($scope) {
+
+}

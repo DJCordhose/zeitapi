@@ -20,15 +20,15 @@ ZeitApp.config(
     ['$routeProvider', function ($routeProvider) {
         $routeProvider.
             when('/', {templateUrl:'views/select.html', controller:ZeitCtrl})
-            .when( '/articles', {templateUrl: "views/articles.html"});
+            .when( '/articles', {templateUrl: "views/articles.html", controller:ZeitCtrl});
     }
     ])
 
 
-function ZeitCtrl($scope, Author, $location) {
+function ZeitCtrl($scope, Author, $location, $rootScope) {
     $scope.articleFind = function (keyword) {
-      Author.get({id: keyword}, function(articles) {
-          $scope.articles = articles.matches;
+      Author.get({id: keyword}, function(articleList) {
+          $scope.$parent.articles = articleList.matches;
           $location.path('/articles');
       })
     }

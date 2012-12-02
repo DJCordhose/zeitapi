@@ -1,14 +1,14 @@
-<table class="tables">
+<table class="table">
     <thead>
       <tr>
           <th>Titel</th>
-          <th>Author</th>
+          <th>Veröffentlichung</th>
       </tr>
     </thead>
     <tbody>
     <tr ng-repeat="article in articles">
-        <td>{{article.title}}</td>
-        <td>{{article.author}}</td>
+        <td><a href="{{article.href}}">{{article.title}}</a></td>
+        <td>{{article.release_date}}</td>
     </tr>
     </tbody>
 </table>

@@ -13,10 +13,10 @@
     </tr>
     <tr>
         <td>Schlagw&ouml;rter</td>
-        <td><span ng-repeat="keyword in article.keywords">{{keyword}} </span> </td>
+        <td><span ng-repeat="keyword in article.keywords">{{keyword.name}} </span> </td>
     </tr>
     <tr>
         <td>Kategorien</td>
-        <td><span ng-repeat="category in article.categories">{{category}} </span> </td>
+        <td><span ng-repeat="category in article.categories">{{category.name}} </span> </td>
     </tr>
 </table>

@@ -3,12 +3,17 @@
       <tr>
           <th>Titel</th>
           <th>Veröffentlichung</th>
+          <th>Details</th>
       </tr>
     </thead>
     <tbody>
     <tr ng-repeat="article in articles">
         <td><a href="{{article.href}}">{{article.title}}</a></td>
         <td>{{article.release_date}}</td>
+        <td>
+            <i class="icon-remove remove" ng-click="details(article)"></i>
+        </td>
+
     </tr>
     </tbody>
 </table>

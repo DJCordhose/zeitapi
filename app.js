@@ -37,11 +37,10 @@ ZeitApp.config(
     ['$routeProvider', function ($routeProvider) {
         $routeProvider.
             when('/', {templateUrl:'views/select.html', controller:ZeitCtrl})
-            .when( '/articles', {templateUrl: "views/articles.html", controller:ZeitCtrl})
-            .when( '/article/details', {templateUrl: "views/details.html", controller: ZeitCtrl});
+            .when( '/articles', {templateUrl: "views/articles.html", controller:ArticlesCtrl})
+            .when( '/article/details', {templateUrl: "views/details.html", controller: DetailsCtrl});
     }
     ])
-
 
 function ZeitCtrl($scope, Content, Details, $location) {
     $scope.articleFind = function (keyword) {
@@ -49,6 +48,7 @@ function ZeitCtrl($scope, Content, Details, $location) {
       Content.get({id: keyword}, function(articleList) {
           $scope.$parent.articles = articleList.matches;
           if ($scope.itemsFound()) {
+              localStorage["lastQuery"] = JSON.stringify($scope.$parent.articles);
               $location.path('/articles');
           }
       });
@@ -68,6 +68,9 @@ function ZeitCtrl($scope, Content, Details, $location) {
 }
 
 function ArticlesCtrl ($scope) {
+    if (!$scope.$parent.articles) {
+        $scope.$parent.articles = JSON.parse(localStorage["lastQuery"]);
+    }
 }
 
 

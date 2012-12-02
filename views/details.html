@@ -17,6 +17,7 @@
     </tr>
     <tr>
         <td>Kategorien</td>
-        <td><span ng-repeat="category in article.categories">{{category.name}} </span> </td>
+        <td><span ng-repeat="category in article.categories">{{category.name}}<span ng-show="!$last">, </span></span></td>
     </tr>
 </table>
+<p><a class="pull-left btn btn-link" href="/#/articles">&laquo; Zurück</a></p>

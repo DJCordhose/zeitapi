@@ -1,27 +1,41 @@
 "use strict";
 
-var ZeitApp = angular.module('ZeitApp', ['ngResource']).
-    factory('Project', function($resource) {
-        var Project = $resource('http://api.zeit.de/content?q=:' +
-            '/angularjs/collections/projects/:id',
-            { apiKey: '4f847ad3e4b08a2eed5f3b54',  }, {
-                update: { method: 'GET' }
+var ZeitApp = angular.module('ZeitApp', ['ng']).config(['$httpProvider', function (http) {
+    delete http.defaults.headers.common['X-Requested-With'];
+}]).factory('Author', function ($http) {
+        var Author = {
+            get:function (params, cb) {
+                $http.get('http://api.zeit.de/keyword/' + params.id + '', {
+                    headers:{'X-Authorization':'602c992cc45dd61c013925c253777e31447df5b2ea6e83152283'}
+                }).success(function (response) {
+                        cb(response);
+                    });
             }
-        );
-
-        Project.prototype.update = function(cb) {
-            return Project.update({id: this._id.$oid},
-                angular.extend({}, this, {_id:undefined}), cb);
         };
 
-        Project.prototype.destroy = function(cb) {
-            return Project.remove({id: this._id.$oid}, cb);
-        };
-
-        return Project;
+        return Author;
     });
 
+ZeitApp.config(
+    ['$routeProvider', function ($routeProvider) {
+        $routeProvider.
+            when('/', {templateUrl:'views/select.html', controller:ZeitCtrl})
+            .when( '/articles', {templateUrl: "views/articles.html", controller:ZeitCtrl});
+    }
+    ])
 
-function ZeitCtrl($scope) {
 
+function ZeitCtrl($scope, Author, $location, $rootScope) {
+    $scope.articleFind = function (keyword) {
+      Author.get({id: keyword}, function(articleList) {
+          $scope.$parent.articles = articleList.matches;
+          $location.path('/articles');
+      })
+    }
+}
+
+
+
+function ArticlesCtrl ($scope ) {
+    console.log("ping" );
 }

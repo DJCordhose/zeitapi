@@ -61,7 +61,7 @@ function ZeitCtrl($scope, Content, Details, $location) {
     $scope.details = function(article) {
         var uri = article.uri;
         Details.get(uri, function(details) {
-            $scope.$parent.details = details;
+            $scope.$parent.article = details;
             $location.path('/article/details');
         });
     }

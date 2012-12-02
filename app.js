@@ -42,15 +42,15 @@ ZeitApp.config(
     }
     ])
 
-function ZeitCtrl($scope, Content, Details, $location) {
+function ZeitCtrl($scope, Content, Details, $location, $rootScope) {
     $scope.articleFind = function (keyword) {
       $scope.searchPerformed = true;
-      $scope.$parent.taskPending = true;
+      $rootScope.taskPending = true;
       Content.get({id: keyword}, function(articleList) {
-          $scope.$parent.taskPending = false;
-          $scope.$parent.articles = articleList.matches;
+          $rootScope.taskPending = false;
+          $rootScope.articles = articleList.matches;
           if ($scope.itemsFound()) {
-              localStorage["lastQuery"] = JSON.stringify($scope.$parent.articles);
+//              localStorage["lastQuery"] = JSON.stringify($scope.$parent.articles);
               $location.path('/articles');
           }
       });
@@ -61,32 +61,44 @@ function ZeitCtrl($scope, Content, Details, $location) {
     }
 
     $scope.details = function(article) {
-        $scope.taskPending = true;
+        $rootScope.taskPending = true;
         var uri = article.uri;
         Details.get(uri, function(details) {
-            $scope.taskPending = false;
-            $scope.$parent.article = details;
+            $rootScope.taskPending = false;
+            $rootScope.article = details;
             $location.path('/article/details');
         });
     }
 
     $scope.inprogress = function() {
-        return $scope.taskPending;
+        return $rootScope.taskPending;
     }
 }
 
-function ArticlesCtrl ($scope) {
-    if (!$scope.$parent.articles) {
-        $scope.$parent.articles = JSON.parse(localStorage["lastQuery"]);
+function ArticlesCtrl ($scope,$rootScope) {
+    if (!$rootScope.articles) {
+//        $rootScope.articles = JSON.parse(localStorage["lastQuery"]);
     }
 }
 
 
-function DetailsCtrl ($scope) {
+function DetailsCtrl ($scope, $location, $rootScope) {
+
+    $scope.$on('$viewContentLoaded', function(event) {
+        var value = $rootScope.article.annotation;
+        $('#annotation').val(value);
+    });
 
     $scope.$watch("article.annotation", function(newVal,oldVal) {
         console.log( newVal )
     })
 
     $('.textarea').wysihtml5();
+
+    $scope.save = function(article) {
+        var value = $('#annotation').val();
+        $rootScope.article.annotation = value;
+//        localStorage["lastQuery"] = JSON.stringify($rootScope.articles);
+        $location.path("/articles");
+    }
 }

@@ -83,5 +83,10 @@ function ArticlesCtrl ($scope) {
 
 
 function DetailsCtrl ($scope) {
+
+    $scope.$watch("article.annotation", function(newVal,oldVal) {
+        console.log( newVal )
+    })
+
     $('.textarea').wysihtml5();
 }

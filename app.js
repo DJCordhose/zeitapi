@@ -5,10 +5,13 @@ var ZeitApp = angular.module('ZeitApp', ['ng']).config(['$httpProvider', functio
 }]).factory('Author', function ($http) {
         var Author = {
             get:function (params, cb) {
-                $http.get('http://api.zeit.de/keyword/' + params.id + '', {
+                var url = 'http://api.zeit.de/content?q=*' + params.id.toLowerCase() + '*&limit=10';
+                $http.get(url, {
                     headers:{'X-Authorization':'602c992cc45dd61c013925c253777e31447df5b2ea6e83152283'}
-                }).success(function (response) {
-                        cb(response);
+                }).success(function(data, status, headers, config) {
+                        cb(data);
+                    }).error(function(data, status, headers, config) {
+                        cb(data);
                     });
             }
         };
@@ -26,17 +29,23 @@ ZeitApp.config(
     ])
 
 
-function ZeitCtrl($scope, Author, $location, $rootScope) {
+function ZeitCtrl($scope, Author, $location) {
     $scope.articleFind = function (keyword) {
+      $scope.searchPerformed = true;
       Author.get({id: keyword}, function(articleList) {
           $scope.$parent.articles = articleList.matches;
-          $location.path('/articles');
+          if ($scope.itemsFound()) {
+              $location.path('/articles');
+          }
       })
+    }
+
+    $scope.itemsFound = function () {
+        return !$scope.searchPerformed || ($scope.$parent.articles && $scope.$parent.articles.length != 0);
     }
 }
 
 
 
 function ArticlesCtrl ($scope ) {
-    console.log("ping" );
 }

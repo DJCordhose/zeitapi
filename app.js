@@ -20,7 +20,8 @@ ZeitApp.config(
     ['$routeProvider', function ($routeProvider) {
         $routeProvider.
             when('/', {templateUrl:'views/select.html', controller:ZeitCtrl})
-            .when( '/articles', {templateUrl: "views/articles.html", controller:ZeitCtrl});
+            .when( '/articles', {templateUrl: "views/articles.html", controller:ZeitCtrl})
+            .when( '/article/details', {templateUrl: "views/articleDetails.html", controller: ZeitCtrl});
     }
     ])
 

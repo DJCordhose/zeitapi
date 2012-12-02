@@ -10,7 +10,7 @@
     <tr ng-repeat="article in articles">
         <td><a href="{{article.href}}" target="_blank">{{article.title}}</a></td>
         <td>{{article.release_date}}</td>
-        <td><button class="btn"><i class="icon-hand-right" ng-click="details(article)"></i></button>
+        <td><button class="btn" ng-click="details(article)"><i class="icon-hand-right"></i></button>
         </td>
     </tr>
     </tbody>

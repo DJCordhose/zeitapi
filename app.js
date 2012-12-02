@@ -45,7 +45,9 @@ ZeitApp.config(
 function ZeitCtrl($scope, Content, Details, $location) {
     $scope.articleFind = function (keyword) {
       $scope.searchPerformed = true;
+      $scope.$parent.taskPending = true;
       Content.get({id: keyword}, function(articleList) {
+          $scope.$parent.taskPending = false;
           $scope.$parent.articles = articleList.matches;
           if ($scope.itemsFound()) {
               localStorage["lastQuery"] = JSON.stringify($scope.$parent.articles);
@@ -59,11 +61,17 @@ function ZeitCtrl($scope, Content, Details, $location) {
     }
 
     $scope.details = function(article) {
+        $scope.taskPending = true;
         var uri = article.uri;
         Details.get(uri, function(details) {
+            $scope.taskPending = false;
             $scope.$parent.article = details;
             $location.path('/article/details');
         });
+    }
+
+    $scope.inprogress = function() {
+        return $scope.taskPending;
     }
 }
 

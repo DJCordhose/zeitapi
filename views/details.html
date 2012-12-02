@@ -1,0 +1,22 @@
+<table class="table">
+    <tr>
+        <td>Titel</td>
+        <td>{{article.title}}</td>
+    </tr>
+    <tr>
+        <td>Untertitel</td>
+        <td>{{article.subtitle}}</td>
+    </tr>
+    <tr>
+        <td>Ver&ouml;ffentlichung</td>
+        <td>{{article.release_date}}</td>
+    </tr>
+    <tr>
+        <td>Schlagw&ouml;rter</td>
+        <td><span ng-repeat="keyword in article.keywords">{{keyword}} </span> </td>
+    </tr>
+    <tr>
+        <td>Kategorien</td>
+        <td><span ng-repeat="category in article.categories">{{category}} </span> </td>
+    </tr>
+</table>
